@@ -1,7 +1,6 @@
 import time
 import random
 
-start_time = time.time()
 
 def averagePivot(lista):
     tot = 0
@@ -54,8 +53,8 @@ def quickSort(lista):
 a = [2,7,3,8,1,6,4,7,3,8]
 
 size = 1000000
-
-b = [random.randrange(1, size) for _ in range(0, size)]
-print(quickSort(b))
-
+b = [random.randrange(1, 100000000) for _ in range(0, size)]
+start_time = time.time()
+c = quickSort(b)
 print("--- %s seconds ---" % (time.time() - start_time))
+#print(c)
