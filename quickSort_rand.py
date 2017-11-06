@@ -9,7 +9,8 @@
 ##    greater = [i for i in array[1:] if i >= pivot]
 ##
 ##    return quickSort(less) + [pivot] + quickSort(greater)
-import random
+import random, time
+
 
 def quickSort2(array): #This shit works
     less = []
@@ -31,8 +32,9 @@ def quickSort2(array): #This shit works
     return quickSort2(less) + equal + quickSort2(greater)
 
 array = [2,7,3,8,1,6,4,7,3,8]
-#size = 1000000
-#array = [random.randrange(1, size) for _ in range(0, size)]
-
+size = 1000000
+array = [random.randrange(1, size) for _ in range(0, size)]
+start_time=time.time()
 print(quickSort2(array))
-#print("--- %s seconds ---" % (time.time() - start_time))
+
+print("--- %s seconds ---" % (time.time() - start_time))
