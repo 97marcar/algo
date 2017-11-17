@@ -1,10 +1,11 @@
-import random
 """
 Authors:
 Marcus Carlsson
 Aron Strandberg
 Robin Vernström Persson
 """
+import random
+
 def pickMedianPivot(lst):
     if (len(lst) <= 1):
         return lst
