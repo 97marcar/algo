@@ -1,59 +1,67 @@
-import time
 import random
 
+def pickMedianPivot(lst):
+    if (len(lst) <= 1):
+        return lst
 
-def averagePivot(lista):
+    first = lst[0]
+    middle = lst[len(lst)/2]
+    last = lst[len(lst)-1]
+
+    if(first<=last<=middle or middle<=last<=first):
+        pivot = len(lst)-1      #last
+
+    elif(middle<=first<=last or last<=first<=middle):
+        pivot = 0                   #first
+
+    elif(last<=middle<=first or first<=middle<=last):
+        pivot = len(lst)/2      #middle
+
+    elif(first == middle and middle == last):
+        pivot = len(lst)/2
+
+    return lst[pivot]
+
+def pickAveragePivot(lst):
     tot = 0
 
-    for i in range(len(lista)):
-        tot += lista[i]
+    for i in range(len(lst)):
+        tot += lst[i]
 
-    avg = tot / len(lista)
+    avg = tot / len(lst)
     closest = 0
-    diff = abs(lista[0] - avg)
+    diff = abs(lst[0] - avg)
 
-    for j in range(len(lista)):
+    for j in range(len(lst)):
         #check if equal to finish quicker
-        if(lista[j] == avg):
-            return(lista[j])
+        if(lst[j] == avg):
+            return(lst[j])
 
-        currentDiff = abs(lista[j] - avg)
+        currentDiff = abs(lst[j] - avg)
 
         #check if current element is closer to average
         if currentDiff <= diff:
             diff = currentDiff
-            closest = lista[j]
+            closest = lst[j]
     return(closest)
 
+def pickRandomPivot(lst):
+    return (lst[random.randint(0, len(lst)-1)])
 
-def quickSort(lista):
+
+def quickSort(lst, func):
     left = []
     right = []
     pivots = []
-    if(len(lista) <= 1):
-        return(lista)
+    if(len(lst) <= 1):
+        return(lst)
     else:
-        pivot = averagePivot(lista)
-        for n in range(len(lista)):
-            if lista[n] < pivot:
-                left.append(lista[n])
-            elif lista[n] > pivot:
-                right.append(lista[n])
+        pivot = func(lst)
+        for n in range(len(lst)):
+            if lst[n] < pivot:
+                left.append(lst[n])
+            elif lst[n] > pivot:
+                right.append(lst[n])
             else:
-                pivots.append(lista[n])
-    return (quickSort(left) + pivots + quickSort(right))
-
-
-
-size = 20000000
-#b = [2,7,3,8,1,6,4,7,3,8]
-#b = list(range(1,size))
-#b = [random.randrange(1, 10) for _ in range(0, size)]+[250,100000000]
-b = [random.randrange(1, size) for _ in range(0, size)]
-print("boom")
-
-start_time = time.time()
-b = quickSort(b)
-#c = quickSort(b)
-print("--- %s seconds ---" % (time.time() - start_time))
-#print(b)
+                pivots.append(lst[n])
+    return (quickSort(left, func) + pivots + quickSort(right, func))
