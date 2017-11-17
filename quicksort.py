@@ -30,12 +30,10 @@ def quickSort(lista):
     left = []
     right = []
     pivots = []
-
     if(len(lista) <= 1):
         return(lista)
     else:
         pivot = averagePivot(lista)
-
         for n in range(len(lista)):
             if lista[n] < pivot:
                 left.append(lista[n])
@@ -43,18 +41,19 @@ def quickSort(lista):
                 right.append(lista[n])
             else:
                 pivots.append(lista[n])
-
-        right = quickSort(right)
-        left = quickSort(left)
-
-    return (left + pivots + right)
+    return (quickSort(left) + pivots + quickSort(right))
 
 
-a = [2,7,3,8,1,6,4,7,3,8]
 
-size = 1000000
-b = [random.randrange(1, 100000000) for _ in range(0, size)]
+size = 20000000
+#b = [2,7,3,8,1,6,4,7,3,8]
+#b = list(range(1,size))
+#b = [random.randrange(1, 10) for _ in range(0, size)]+[250,100000000]
+b = [random.randrange(1, size) for _ in range(0, size)]
+print("boom")
+
 start_time = time.time()
-c = quickSort(b)
+b = quickSort(b)
+#c = quickSort(b)
 print("--- %s seconds ---" % (time.time() - start_time))
-#print(c)
+#print(b)
