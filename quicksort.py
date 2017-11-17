@@ -1,5 +1,10 @@
 import random
-
+"""
+Authors:
+Marcus Carlsson
+Aron Strandberg
+Robin Vernström Persson
+"""
 def pickMedianPivot(lst):
     if (len(lst) <= 1):
         return lst
@@ -49,14 +54,14 @@ def pickRandomPivot(lst):
     return (lst[random.randint(0, len(lst)-1)])
 
 
-def quickSort(lst, func):
+def quickSort(lst, pickPivot):
     left = []
     right = []
     pivots = []
     if(len(lst) <= 1):
         return(lst)
     else:
-        pivot = func(lst)
+        pivot = pickPivot(lst)
         for n in range(len(lst)):
             if lst[n] < pivot:
                 left.append(lst[n])
@@ -64,4 +69,4 @@ def quickSort(lst, func):
                 right.append(lst[n])
             else:
                 pivots.append(lst[n])
-    return (quickSort(left, func) + pivots + quickSort(right, func))
+    return (quickSort(left, pickPivot) + pivots + quickSort(right, pickPivot))
